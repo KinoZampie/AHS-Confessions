@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block body %}
+<div id=header>
+    AHS Confessions
+</div>
+<form method=POST>
+    <div id=createPost>
+        <h1>Create a post:</h1>
+        <div id=createInputs>
+            <input id=titleInput type=text placeholder="Title" name="title" /><br>
+            <input id=textInput type=text placeholder="Description" name="description" />
+        </div>
+        <input id="submitPost" type="submit" value="Submit">
+    </div>
+</form>
+{% for post in posts.items%}
+<div class=post>
+    <h1 class="title">{{ post.id }}. {{ post.title }}</h1>
+    <p class ="description">{{post.description}}</p>
+    <p class="date">{{post.dateCreated}}</p>
+</div>
+{% endfor %}
+
+<div id=paginationLinks>
+    {% for pageNum in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if pageNum %}
+            <a class=pageLink href="{{ url_for('index',page=pageNum) }}">{{pageNum}}</a>
+        {% else %}
+            <a class=pageLink>...</a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}
