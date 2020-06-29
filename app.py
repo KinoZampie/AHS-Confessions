@@ -34,3 +34,6 @@ def index():
         posts = Confessions.query.order_by(Confessions.id.desc()).paginate(page=page,per_page=5)
         print(datetime.now().strftime('%B %d, %Y %I:%M%p'))
         return render_template("index.html", posts=posts)
+
+if __name__ == "__main__":
+    app.run()
